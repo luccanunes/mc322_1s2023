@@ -1,11 +1,18 @@
+import java.util.Random;
+
 public class Sinistro {
     private String data;
     private String endereco;
     private int id;
 
+    private int gerarId() {
+        return (new Random()).nextInt();
+    }
+
     public Sinistro(String data, String endereco) {
         this.data = data;
         this.endereco = endereco;
+        this.id = gerarId();
     }
 
     public String getData() {
@@ -26,9 +33,5 @@ public class Sinistro {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
