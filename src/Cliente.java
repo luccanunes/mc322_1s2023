@@ -84,4 +84,8 @@ public class Cliente {
         return primeiroDigito == Character.getNumericValue(temp.charAt(9)) &&
                 segundoDigito == Character.getNumericValue(temp.charAt(10));
     }
+
+    public String toString() {
+        return this.nome;
+    }
 }
