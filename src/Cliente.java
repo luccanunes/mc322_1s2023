@@ -89,6 +89,9 @@ public class Cliente {
     }
 
     public String toString() {
-        return this.nome;
+        return "Nome: " + this.nome + "\nCPF: " + this.cpf
+                + "\nData de nascimento: " + this.dataNascimento
+                + "\nEndereço: " + this.endereco
+                + "\nIdade: " + this.idade;
     }
 }
