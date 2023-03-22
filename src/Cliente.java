@@ -56,6 +56,9 @@ public class Cliente {
     public boolean validarCPF() {
         String temp = this.cpf;
         temp = temp.replaceAll("[\\.-]", "");
+        for (int i = 0; i < temp.length(); ++i)
+            if (!Character.isDigit(temp.charAt(i)))
+                return false;
         if (temp.length() != 11)
             return false;
         boolean todosIguais = true;
