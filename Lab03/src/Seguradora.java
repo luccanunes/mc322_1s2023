@@ -24,7 +24,12 @@ public class Seguradora {
     }
 
     public void listarClientes(String tipoCliente) { // pj ou pf
-
+        for (int i = 0; i < listaClientes.size(); ++i) {
+            Cliente cliente = listaClientes.get(i);
+            if (cliente.getTipo() == tipoCliente) {
+                System.out.println(cliente);
+            }
+        }
     }
 
     public boolean gerarSinistro() {
@@ -36,7 +41,10 @@ public class Seguradora {
     }
 
     public void listarSinistros() {
-
+        for (int i = 0; i < listaSinistros.size(); ++i) {
+            Sinistro sinistro = listaSinistros.get(i);
+            System.out.println(sinistro);
+        }
     }
 
     public ArrayList<Sinistro> getListaSinistros() {

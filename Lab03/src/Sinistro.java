@@ -62,4 +62,12 @@ public class Sinistro {
     public int getId() {
         return id;
     }
+
+    public String toString() {
+        return "Data: " + this.data
+                + "\nEndereço: " + this.endereco
+                + "\nSeguradora: " + this.seguradora
+                + "\nVeiculo: " + this.veiculo
+                + "\nCliente: " + this.cliente;
+    }
 }

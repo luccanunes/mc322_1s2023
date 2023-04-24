@@ -41,4 +41,11 @@ public class Veiculo {
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
+
+    public String toString() {
+        return "Placa: " + this.placa
+                + "\nMarca: " + this.marca
+                + "\nModelo: " + this.modelo
+                + "\nAno de fabricação: " + this.anoFabricacao;
+    }
 }
