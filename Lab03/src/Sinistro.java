@@ -7,7 +7,7 @@ public class Sinistro {
     private Veiculo veiculo;
     private Cliente cliente;
 
-    private int id;
+    private final int id;
 
     private int gerarId() {
         return (new Random()).nextInt();

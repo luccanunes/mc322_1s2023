@@ -16,14 +16,31 @@ public class Seguradora {
     }
 
     public boolean cadastrarCliente(Cliente cliente) {
+        // Retorna false se o cliente já está registrado
+        // Do contrário, retorna true
+        for (int i = 0; i < listaClientes.size(); ++i) {
+            if (listaClientes.get(i) == cliente) {
+                return true;
+            }
+        }
+        listaClientes.add(cliente);
+        return false;
+    }
+
+    public boolean removerCliente(String cliente) {
+        // Retorna false se o cliente não está registrado
+        // Do contrário, retorna true
+        for (int i = 0; i < listaClientes.size(); ++i) {
+            if (listaClientes.get(i).getNome() == cliente) {
+                listaClientes.remove(i);
+                return false;
+            }
+        }
         return true;
     }
 
-    public boolean removerCliente(Cliente cliente) {
-        return true;
-    }
-
-    public void listarClientes(String tipoCliente) { // pj ou pf
+    public void listarClientes(String tipoCliente) {
+        // tipoCliente: "PJ" ou "PF"
         for (int i = 0; i < listaClientes.size(); ++i) {
             Cliente cliente = listaClientes.get(i);
             if (cliente.getTipo() == tipoCliente) {
@@ -46,6 +63,8 @@ public class Seguradora {
             System.out.println(sinistro);
         }
     }
+
+    /* Getters e Setters */
 
     public ArrayList<Sinistro> getListaSinistros() {
         return listaSinistros;

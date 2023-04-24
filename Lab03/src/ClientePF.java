@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ClientePF extends Cliente {
-    private String cpf;
+    private final String cpf;
     private String classeEconomica;
     private String educacao;
     private String genero;
@@ -55,10 +55,6 @@ public class ClientePF extends Cliente {
 
     public String getCpf() {
         return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public LocalDate getDataNascimento() {

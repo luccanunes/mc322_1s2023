@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ClientePJ extends Cliente {
-    private String cnpj;
+    private final String cnpj;
     private LocalDate dataFundacao;
 
     public ClientePJ(String nome, String endereco, LocalDate dataFundacao,
@@ -14,11 +14,11 @@ public class ClientePJ extends Cliente {
 
     public boolean validarCNPJ() {
         String temp = this.cnpj;
-        temp = temp.replaceAll("[\\.-]", "");
+        temp = temp.replaceAll("[\\.-/]", "");
         for (int i = 0; i < temp.length(); ++i)
             if (!Character.isDigit(temp.charAt(i)))
                 return false;
-        if (temp.length() != 11)
+        if (temp.length() != 14)
             return false;
         boolean todosIguais = true;
         for (int i = 1; i < 11; ++i)
@@ -27,29 +27,47 @@ public class ClientePJ extends Cliente {
         if (todosIguais)
             return false;
 
+        int primeiros_multiplicadores[] = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
         int primeiroDigito = 0;
-        for (int i = 0; i < 9; ++i) {
-            primeiroDigito += (10 - i) * Character.getNumericValue(temp.charAt(i));
+        for (int i = 0; i < 12; ++i) {
+            primeiroDigito += primeiros_multiplicadores[i] * Character.getNumericValue(temp.charAt(i));
         }
-        primeiroDigito = 11 - (primeiroDigito % 11);
-        if (primeiroDigito >= 10)
+        primeiroDigito %= 11;
+        if (primeiroDigito > 1)
+            primeiroDigito = 11 - primeiroDigito;
+        else
             primeiroDigito = 0;
 
+        if (primeiroDigito != Character.getNumericValue(temp.charAt(12)))
+            return false;
+
+        int segundos_multiplicadores[] = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
         int segundoDigito = 0;
-        for (int i = 0; i < 10; ++i) {
-            segundoDigito += (11 - i) * Character.getNumericValue(temp.charAt(i));
+        for (int i = 0; i < 13; ++i) {
+            segundoDigito += segundos_multiplicadores[i] * Character.getNumericValue(temp.charAt(i));
         }
-        segundoDigito = 11 - (segundoDigito % 11);
-        if (segundoDigito >= 10)
+        segundoDigito %= 11;
+        if (segundoDigito > 1)
+            segundoDigito = 11 - segundoDigito;
+        else
             segundoDigito = 0;
 
-        return primeiroDigito == Character.getNumericValue(temp.charAt(9)) &&
-                segundoDigito == Character.getNumericValue(temp.charAt(10));
+        return segundoDigito == Character.getNumericValue(temp.charAt(13));
     }
 
     public String toString() {
         return "Nome: " + this.getNome() + "\nCNPJ: " + this.cnpj
                 + "\nData de fundação: " + this.dataFundacao
                 + "\nEndereço: " + this.getEndereco();
+    }
+
+    /* Getters e Setters */
+
+    public LocalDate getDataFundacao() {
+        return dataFundacao;
+    }
+
+    public void setDataFundacao(LocalDate dataFundacao) {
+        this.dataFundacao = dataFundacao;
     }
 }
