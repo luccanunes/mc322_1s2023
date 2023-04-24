@@ -43,7 +43,9 @@ public class Seguradora {
         // tipoCliente: "PJ" ou "PF"
         for (int i = 0; i < listaClientes.size(); ++i) {
             Cliente cliente = listaClientes.get(i);
-            if (cliente.getTipo() == tipoCliente) {
+            if ((tipoCliente == "PJ" && cliente instanceof ClientePJ)
+                    ||
+                    (tipoCliente == "PF" && cliente instanceof ClientePF)) {
                 System.out.println(cliente);
             }
         }
@@ -54,7 +56,15 @@ public class Seguradora {
     }
 
     public boolean visualizarSinistro(String cliente) {
-        return true;
+        // cliente: nome do cliente
+        for (int i = 0; i < listaSinistros.size(); ++i) {
+            Sinistro sinistro = listaSinistros.get(i);
+            if (sinistro.getCliente().getNome() == cliente) {
+                System.out.println(sinistro);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void listarSinistros() {
