@@ -3,6 +3,10 @@ import java.util.Random;
 public class Sinistro {
     private String data;
     private String endereco;
+    private Seguradora seguradora;
+    private Veiculo veiculo;
+    private Cliente cliente;
+
     private int id;
 
     private int gerarId() {
@@ -13,6 +17,30 @@ public class Sinistro {
         this.data = data;
         this.endereco = endereco;
         this.id = gerarId();
+    }
+
+    public Seguradora getSeguradora() {
+        return seguradora;
+    }
+
+    public void setSeguradora(Seguradora seguradora) {
+        this.seguradora = seguradora;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String getData() {
