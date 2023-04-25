@@ -1,7 +1,8 @@
+import java.time.LocalDate;
 import java.util.Random;
 
 public class Sinistro {
-    private String data;
+    private LocalDate data;
     private String endereco;
     private Seguradora seguradora;
     private Veiculo veiculo;
@@ -14,11 +15,24 @@ public class Sinistro {
         return (new Random()).nextInt();
     }
 
-    public Sinistro(String data, String endereco) {
+    public Sinistro(LocalDate data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.data = data;
         this.endereco = endereco;
+        this.seguradora = seguradora;
+        this.veiculo = veiculo;
+        this.cliente = cliente;
         this.id = gerarId();
     }
+
+    public String toString() {
+        return "Data: " + this.data
+                + "\nEndereço: " + this.endereco
+                + "\nSeguradora: " + this.seguradora
+                + "\nVeiculo: " + this.veiculo
+                + "\nCliente: " + this.cliente;
+    }
+
+    /* Getters e Setters */
 
     public Seguradora getSeguradora() {
         return seguradora;
@@ -44,11 +58,11 @@ public class Sinistro {
         this.cliente = cliente;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -62,13 +76,5 @@ public class Sinistro {
 
     public int getId() {
         return id;
-    }
-
-    public String toString() {
-        return "Data: " + this.data
-                + "\nEndereço: " + this.endereco
-                + "\nSeguradora: " + this.seguradora
-                + "\nVeiculo: " + this.veiculo
-                + "\nCliente: " + this.cliente;
     }
 }

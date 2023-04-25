@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Seguradora {
@@ -34,6 +35,18 @@ public class Seguradora {
         // Do contrário, retorna true
         for (int i = 0; i < listaClientes.size(); ++i) {
             if (listaClientes.get(i).getNome() == cliente) {
+                ArrayList<Integer> indices_para_remover = new ArrayList<>(); // Guarda os índices dos sinistros desse
+                                                                             // cliente
+                for (int j = 0; j < listaSinistros.size(); ++j) {
+                    Sinistro sinistro = listaSinistros.get(j);
+                    if (sinistro.getCliente().getNome() == cliente) {
+                        indices_para_remover.add(j);
+                    }
+                }
+                // Remove os sinistros associados ao cliente
+                for (int indice : indices_para_remover) {
+                    listaSinistros.remove(indice);
+                }
                 listaClientes.remove(i);
                 return false;
             }
@@ -53,7 +66,10 @@ public class Seguradora {
         }
     }
 
-    public boolean gerarSinistro(Sinistro sinistro) {
+    public boolean gerarSinistro(Veiculo veiculo, Cliente cliente, String endereco) {
+        // Gera um sinistro com o veiculo e cliente passados e a data atual
+        cadastrarCliente(cliente);
+        listaSinistros.add(new Sinistro(LocalDate.now(), endereco, this, veiculo, cliente));
         return true;
     }
 
