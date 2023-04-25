@@ -13,6 +13,8 @@ public class Seguradora {
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
+        this.listaClientes = new ArrayList<>();
+        this.listaSinistros = new ArrayList<>();
     }
 
     public boolean cadastrarCliente(Cliente cliente) {
@@ -51,7 +53,7 @@ public class Seguradora {
         }
     }
 
-    public boolean gerarSinistro() {
+    public boolean gerarSinistro(Sinistro sinistro) {
         return true;
     }
 
@@ -68,6 +70,7 @@ public class Seguradora {
     }
 
     public void listarSinistros() {
+        // Lista os sinistros
         for (int i = 0; i < listaSinistros.size(); ++i) {
             Sinistro sinistro = listaSinistros.get(i);
             System.out.println(sinistro);

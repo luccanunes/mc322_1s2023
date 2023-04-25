@@ -10,6 +10,7 @@ public class Sinistro {
     private final int id;
 
     private int gerarId() {
+        // Gera um identificador para o sinistro
         return (new Random()).nextInt();
     }
 

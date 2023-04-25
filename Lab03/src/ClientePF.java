@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class ClientePF extends Cliente {
@@ -19,6 +20,8 @@ public class ClientePF extends Cliente {
         this.classeEconomica = classeEconomica;
         this.educacao = educacao;
         this.genero = genero;
+        this.dataNascimento = dataLicenca;
+        this.setIdade(Period.between(dataNascimento, LocalDate.now()).getYears());
     }
 
     public boolean validarCPF() {
@@ -66,8 +69,7 @@ public class ClientePF extends Cliente {
                 + "\nIdade: " + this.idade
                 + "\nClasse econômica: " + this.classeEconomica
                 + "\nEducação: " + this.educacao
-                + "\nGênero: " + this.genero
-                + "\nEducação: " + this.educacao;
+                + "\nGênero: " + this.genero;
     }
 
     /* Getters e Setters */

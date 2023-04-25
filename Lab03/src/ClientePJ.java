@@ -14,7 +14,8 @@ public class ClientePJ extends Cliente {
 
     public boolean validarCNPJ() {
         String temp = this.cnpj;
-        temp = temp.replaceAll("[\\.-/]", ""); // Remove os caracteres separadores
+        temp = temp.replaceAll("[\\.-]", ""); // Remove os caracteres separadores
+        temp = temp.replaceAll("[/]", "");
         for (int i = 0; i < temp.length(); ++i)
             if (!Character.isDigit(temp.charAt(i))) // Checa se todos os caracteres são dígitos
                 return false;
