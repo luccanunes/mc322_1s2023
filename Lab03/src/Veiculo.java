@@ -11,6 +11,8 @@ public class Veiculo {
         this.anoFabricacao = anoFabricacao;
     }
 
+    /* Getters e setters */
+
     public int getAnoFabricacao() {
         return anoFabricacao;
     }

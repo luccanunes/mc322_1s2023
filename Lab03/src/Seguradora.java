@@ -84,9 +84,11 @@ public class Seguradora {
     public boolean visualizarSinistro(String cliente) {
         // cliente: nome do cliente
         // Mostra na tela os sinistros associados a esse cliente
+        // Retona true se existe algum sinistro associado a esse cliente e false do
+        // contrário
         for (int i = 0; i < listaSinistros.size(); ++i) {
             Sinistro sinistro = listaSinistros.get(i);
-            if (sinistro.getCliente().getNome() == cliente) {
+            if (sinistro.getCliente().getNome().trim().equals(cliente)) {
                 System.out.println(sinistro);
                 return true;
             }
