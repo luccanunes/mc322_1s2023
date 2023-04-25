@@ -59,9 +59,10 @@ public class ClientePJ extends Cliente {
     }
 
     public String toString() {
-        return "Nome: " + this.getNome() + "\nCNPJ: " + this.cnpj
+        return "-----ClientePJ-----\nNome: " + this.getNome() + "\nCNPJ: " + this.cnpj
                 + "\nData de fundação: " + this.dataFundacao
-                + "\nEndereço: " + this.getEndereco();
+                + "\nEndereço: " + this.getEndereco()
+                + "\n---------------";
     }
 
     /* Getters e Setters */

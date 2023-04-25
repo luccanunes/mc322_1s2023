@@ -62,14 +62,15 @@ public class ClientePF extends Cliente {
     }
 
     public String toString() {
-        return "Nome: " + this.getNome() + "\nCPF: " + this.cpf
+        return "-----ClientePF-----\nNome: " + this.getNome() + "\nCPF: " + this.cpf
                 + "\nData de nascimento: " + this.dataNascimento
                 + "\nData da licença: " + this.dataLicenca
                 + "\nEndereço: " + this.getEndereco()
                 + "\nIdade: " + this.idade
                 + "\nClasse econômica: " + this.classeEconomica
                 + "\nEducação: " + this.educacao
-                + "\nGênero: " + this.genero;
+                + "\nGênero: " + this.genero
+                + "\n---------------";
     }
 
     /* Getters e Setters */

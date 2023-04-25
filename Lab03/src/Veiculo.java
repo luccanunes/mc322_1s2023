@@ -4,10 +4,11 @@ public class Veiculo {
     private String modelo;
     private int anoFabricacao;
 
-    public Veiculo(String placa, String marca, String modelo) {
+    public Veiculo(String placa, String marca, String modelo, int anoFabricacao) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
+        this.anoFabricacao = anoFabricacao;
     }
 
     public int getAnoFabricacao() {
@@ -43,9 +44,6 @@ public class Veiculo {
     }
 
     public String toString() {
-        return "Placa: " + this.placa
-                + "\nMarca: " + this.marca
-                + "\nModelo: " + this.modelo
-                + "\nAno de fabricação: " + this.anoFabricacao;
+        return this.placa + " " + this.marca + " " + this.modelo + " " + this.anoFabricacao;
     }
 }

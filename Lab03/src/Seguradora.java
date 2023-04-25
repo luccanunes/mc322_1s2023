@@ -18,6 +18,14 @@ public class Seguradora {
         this.listaSinistros = new ArrayList<>();
     }
 
+    public String toString() {
+        return "\n-----Seguradora-----\nNome: " + this.nome
+                + "\nEndereço: " + this.endereco
+                + "\nEmail: " + this.email
+                + "\nTelefone: " + this.telefone
+                + "\n---------------";
+    }
+
     public boolean cadastrarCliente(Cliente cliente) {
         // Retorna false se o cliente já está registrado
         // Do contrário, retorna true
@@ -75,6 +83,7 @@ public class Seguradora {
 
     public boolean visualizarSinistro(String cliente) {
         // cliente: nome do cliente
+        // Mostra na tela os sinistros associados a esse cliente
         for (int i = 0; i < listaSinistros.size(); ++i) {
             Sinistro sinistro = listaSinistros.get(i);
             if (sinistro.getCliente().getNome() == cliente) {

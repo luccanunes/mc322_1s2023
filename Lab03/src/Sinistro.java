@@ -25,11 +25,12 @@ public class Sinistro {
     }
 
     public String toString() {
-        return "Data: " + this.data
+        return "-----Sinistro-----\nData: " + this.data
                 + "\nEndereço: " + this.endereco
-                + "\nSeguradora: " + this.seguradora
+                + "\nSeguradora: " + this.seguradora.getNome()
                 + "\nVeiculo: " + this.veiculo
-                + "\nCliente: " + this.cliente;
+                + "\nCliente: " + this.cliente.getNome()
+                + "\n---------------";
     }
 
     /* Getters e Setters */

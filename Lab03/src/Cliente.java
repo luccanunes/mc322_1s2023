@@ -36,7 +36,8 @@ public class Cliente {
     }
 
     public String toString() {
-        return "Nome: " + this.nome
-                + "\nEndereço: " + this.endereco;
+        return "\n-----Cliente-----\nNome: " + this.nome
+                + "\nEndereço: " + this.endereco
+                + "\n---------------";
     }
 }
