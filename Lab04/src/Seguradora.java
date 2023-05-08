@@ -104,6 +104,14 @@ public class Seguradora {
         }
     }
 
+    public int calcularPrecoSeguroCliente() {
+        return 1;
+    }
+
+    public int calcularReceita() {
+        return 1;
+    }
+
     /* Getters e Setters */
 
     public ArrayList<Sinistro> getListaSinistros() {

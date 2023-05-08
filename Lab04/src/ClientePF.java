@@ -36,6 +36,19 @@ public class ClientePF extends Cliente {
                 + "\n---------------";
     }
 
+    public double calculaScore() {
+        double FATOR_IDADE = 0;
+        int idade = this.getIdade();
+        if (18 <= idade && idade <= 30) {
+            FATOR_IDADE = CalcSeguro.FATOR_18_30.getx();
+        } else if (30 < idade && idade < 60) {
+            FATOR_IDADE = CalcSeguro.FATOR_30_60.getx();
+        } else if (60 <= idade && idade <= 90) {
+            FATOR_IDADE = CalcSeguro.FATOR_60_90.getx();
+        }
+        return CalcSeguro.VALOR_BASE.getx() * FATOR_IDADE * this.getListaVeiculos().size();
+    }
+
     /* Getters e Setters */
 
     public String getClasseEconomica() {
