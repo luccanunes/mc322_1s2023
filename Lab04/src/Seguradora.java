@@ -104,11 +104,17 @@ public class Seguradora {
         }
     }
 
-    public int calcularPrecoSeguroCliente() {
-        return 1;
+    public double calcularPrecoSeguroCliente(Cliente cliente) {
+        int qtd_sinistros = 0;
+        for (int i = 0; i < listaSinistros.size(); ++i) {
+            if (listaSinistros.get(i).getCliente() == cliente) {
+                qtd_sinistros++;
+            }
+        }
+        return cliente.calculaScore() * (1 + qtd_sinistros);
     }
 
-    public int calcularReceita() {
+    public double calcularReceita() {
         return 1;
     }
 
