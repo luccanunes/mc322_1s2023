@@ -7,6 +7,15 @@ import java.util.Scanner;
 public class Main {
     public static ArrayList<Seguradora> seguradoras;
 
+    public static Seguradora encontrar_seguradora(String nome) {
+        for (Seguradora seguradora : seguradoras) {
+            if (seguradora.getNome().equals(nome)) {
+                return seguradora;
+            }
+        }
+        return null;
+    }
+
     public static Veiculo ler_veiculo(Scanner scan) {
         String placa, marca, modelo;
         int anoFabricacao;
@@ -168,24 +177,14 @@ public class Main {
                             String nome_seguradora;
                             System.out.println("Seguradora:");
                             nome_seguradora = scan.nextLine();
-                            for (Seguradora seguradora : seguradoras) {
-                                if (seguradora.getNome().equals(nome_seguradora)) {
-                                    seguradora.listarClientes("PJ");
-                                    break;
-                                }
-                            }
+                            encontrar_seguradora(nome_seguradora).listarClientes("PJ");
                             break;
                         }
                         case 2: {
                             String nome_seguradora;
                             System.out.println("Seguradora:");
                             nome_seguradora = scan.nextLine();
-                            for (Seguradora seguradora : seguradoras) {
-                                if (seguradora.getNome().equals(nome_seguradora)) {
-                                    seguradora.listarClientes("PF");
-                                    break;
-                                }
-                            }
+                            encontrar_seguradora(nome_seguradora).listarClientes("PF");
                             break;
                         }
                         case 3: {
@@ -217,14 +216,10 @@ public class Main {
                             String nome_seguradora;
                             System.out.println("Seguradora:");
                             nome_seguradora = scan.nextLine();
-                            for (Seguradora seguradora : seguradoras) {
-                                if (seguradora.getNome().equals(nome_seguradora)) {
-                                    for (Cliente cliente : seguradora.getListaClientes()) {
-                                        for (Veiculo veiculo : cliente.getListaVeiculos()) {
-                                            System.out.println(veiculo);
-                                        }
-                                    }
-                                    break;
+                            Seguradora seguradora = encontrar_seguradora(nome_seguradora);
+                            for (Cliente cliente : seguradora.getListaClientes()) {
+                                for (Veiculo veiculo : cliente.getListaVeiculos()) {
+                                    System.out.println(veiculo);
                                 }
                             }
                             break;
@@ -237,6 +232,46 @@ public class Main {
                     System.out.println("(2) Excluir veículo");
                     System.out.println("(3) Excluir sinistro");
                     System.out.println("(4) Voltar");
+                    entrada = Integer.parseInt(scan.nextLine());
+                    switch (entrada) {
+                        case 1: {
+                            String nome_seguradora, nome_cliente;
+                            System.out.println("Nome do cliente:");
+                            nome_cliente = scan.nextLine();
+                            System.out.println("Seguradora:");
+                            nome_seguradora = scan.nextLine();
+                            Seguradora seguradora = encontrar_seguradora(nome_seguradora);
+                            seguradora.removerCliente(nome_cliente);
+                        }
+                        case 2: {
+                            String placa;
+                            System.out.println("Placa do veículo:");
+                            placa = scan.nextLine();
+                            for (Seguradora seguradora : seguradoras) {
+                                ArrayList<Integer> indices_sinistro = new ArrayList<>();
+                                for (int i = 0; i < seguradora.getListaSinistros().size(); ++i) {
+                                    Sinistro sinistro = seguradora.getListaSinistros().get(i);
+                                    if (sinistro.getVeiculo().getPlaca().equals(placa)) {
+                                        indices_sinistro.add(i);
+                                    }
+                                }
+                                ArrayList<Integer> indices_cliente = new ArrayList<>();
+                                for (int i = 0; i < seguradora.getListaClientes().size(); ++i) {
+                                    Cliente cliente = seguradora.getListaClientes().get(i);
+                                    for (Veiculo veiculo : cliente.getListaVeiculos()) {
+                                        if (veiculo.getPlaca().equals(placa)) {
+                                            indices_cliente.add(i);
+                                            break;
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                        case 3: {
+
+                        }
+                    }
                     break;
                 }
                 case GERAR_SINISTRO:
