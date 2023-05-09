@@ -20,7 +20,7 @@ public class ClientePF extends Cliente {
         this.classeEconomica = classeEconomica;
         this.educacao = educacao;
         this.genero = genero;
-        this.dataNascimento = dataLicenca;
+        this.dataNascimento = dataNascimento;
         this.setIdade(Period.between(dataNascimento, LocalDate.now()).getYears());
     }
 
