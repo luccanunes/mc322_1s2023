@@ -18,6 +18,7 @@ public class ClientePJ extends Cliente {
         return "-----ClientePJ-----\nNome: " + this.getNome() + "\nCNPJ: " + this.cnpj
                 + "\nData de fundação: " + this.dataFundacao
                 + "\nEndereço: " + this.getEndereco()
+                + "\nValor seguro: " + this.getValorSeguro()
                 + "\n---------------";
     }
 

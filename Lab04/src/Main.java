@@ -39,7 +39,45 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        seguradora = new Seguradora(
+                "SeguradoraSegura",
+                "(71) 99999-9999",
+                "seguradora@segura.com",
+                "Avenida Segura 221");
 
+        ArrayList<Veiculo> veiculos_lucca = new ArrayList<>();
+        veiculos_lucca.add(new Veiculo("666", "Ferrari", "Corsa", 2018));
+        veiculos_lucca.add(new Veiculo("777", "Fiat", "Palio", 2002));
+        ClientePF lucca = new ClientePF(
+                "Lucca",
+                "Rua Lindo 221B",
+                LocalDate.of(2022, Month.JULY, 8),
+                "Muito educado",
+                "Suspense",
+                "Quebrado",
+                veiculos_lucca,
+                "070.680.938-68",
+                LocalDate.of(2004, Month.JULY, 7));
+        seguradora.cadastrarCliente(lucca);
+
+        for (Cliente cliente : seguradora.getListaClientes()) {
+            System.out.println(cliente);
+        }
+
+        System.out.println(lucca);
+        seguradora.calcularPrecoSeguroCliente(lucca);
+
+        for (Cliente cliente : seguradora.getListaClientes()) {
+            System.out.println(cliente);
+        }
+
+        System.out.println(lucca);
+
+        lucca.setNome("accul");
+
+        for (Cliente cliente : seguradora.getListaClientes()) {
+            System.out.println(cliente);
+        }
         // menuInterativo();
     }
 }

@@ -105,17 +105,25 @@ public class Seguradora {
     }
 
     public double calcularPrecoSeguroCliente(Cliente cliente) {
+        // Retorna o preço do seguro do cliente
         int qtd_sinistros = 0;
         for (int i = 0; i < listaSinistros.size(); ++i) {
-            if (listaSinistros.get(i).getCliente() == cliente) {
+            if (listaSinistros.get(i).getCliente().equals(cliente)) {
+                // Calcula quantidade de sinistros associados a esse cliente
                 qtd_sinistros++;
             }
         }
-        return cliente.calculaScore() * (1 + qtd_sinistros);
+        cliente.setValorSeguro(cliente.calculaScore() * (1 + qtd_sinistros));
+        return cliente.getValorSeguro();
     }
 
     public double calcularReceita() {
-        return 1;
+        // Retorna a soma dos valores do seguro de cada cliente
+        double receita = 0;
+        for (Cliente cliente : listaClientes) {
+            receita += this.calcularPrecoSeguroCliente(cliente);
+        }
+        return receita;
     }
 
     /* Getters e Setters */

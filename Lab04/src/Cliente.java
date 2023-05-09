@@ -51,6 +51,7 @@ public class Cliente {
     public String toString() {
         return "\n-----Cliente-----\nNome: " + this.nome
                 + "\nEndereço: " + this.endereco
+                + "\nValor seguro: " + this.valorSeguro
                 + "\n---------------";
     }
 }

@@ -33,6 +33,7 @@ public class ClientePF extends Cliente {
                 + "\nClasse econômica: " + this.classeEconomica
                 + "\nEducação: " + this.educacao
                 + "\nGênero: " + this.genero
+                + "\nValor seguro: " + this.getValorSeguro()
                 + "\n---------------";
     }
 
