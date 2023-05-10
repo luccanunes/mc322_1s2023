@@ -12,6 +12,15 @@ public class Cliente {
         this.listaVeiculos = listaVeiculos;
     }
 
+    public void removerVeiculo(String placa) {
+        int indice = -1;
+        for (int i = 0; i < listaVeiculos.size(); ++i)
+            if (listaVeiculos.get(i).getPlaca().equals(placa))
+                indice = i;
+        if (indice != -1)
+            listaVeiculos.remove(indice);
+    }
+
     public double calculaScore() {
         return 1.0;
     }

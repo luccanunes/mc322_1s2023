@@ -38,6 +38,14 @@ public class Seguradora {
         return false;
     }
 
+    public boolean removerSinistro(int indice) {
+        if (0 <= indice && indice < listaSinistros.size()) {
+            listaSinistros.remove(indice);
+            return true;
+        }
+        return false;
+    }
+
     public boolean removerCliente(String cliente) {
         // Retorna false se o cliente não está registrado
         // Do contrário, retorna true

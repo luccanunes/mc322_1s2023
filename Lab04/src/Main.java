@@ -255,21 +255,37 @@ public class Main {
                                         indices_sinistro.add(i);
                                     }
                                 }
-                                ArrayList<Integer> indices_cliente = new ArrayList<>();
+                                for (int i : indices_sinistro)
+                                    seguradora.removerSinistro(i);
                                 for (int i = 0; i < seguradora.getListaClientes().size(); ++i) {
+                                    boolean tem_o_veiculo = false;
                                     Cliente cliente = seguradora.getListaClientes().get(i);
                                     for (Veiculo veiculo : cliente.getListaVeiculos()) {
                                         if (veiculo.getPlaca().equals(placa)) {
-                                            indices_cliente.add(i);
+                                            tem_o_veiculo = true;
                                             break;
                                         }
                                     }
+                                    if (tem_o_veiculo)
+                                        cliente.removerVeiculo(placa);
                                 }
-
                             }
                         }
                         case 3: {
-
+                            String nome_seguradora;
+                            System.out.println("Seguradora:");
+                            nome_seguradora = scan.nextLine();
+                            Seguradora seguradora = encontrar_seguradora(nome_seguradora);
+                            int id_sinistro, indice_sinistro = -1;
+                            System.out.println("ID do sinistro:");
+                            id_sinistro = Integer.parseInt(scan.nextLine());
+                            for (int i = 0; i < seguradora.getListaSinistros().size(); ++i) {
+                                if (seguradora.getListaSinistros().get(i).getId() == id_sinistro) {
+                                    indice_sinistro = i;
+                                    break;
+                                }
+                            }
+                            seguradora.removerSinistro(indice_sinistro);
                         }
                     }
                     break;
@@ -278,10 +294,10 @@ public class Main {
                     break;
                 case TRANSFERIR_SEGURO:
                     break;
-                case CALCULAR_RECEITA:
+                case CALCULAR_RECEITA: {
+
                     break;
-                case SAIR:
-                    break;
+                }
             }
         }
         scan.close();
@@ -289,35 +305,52 @@ public class Main {
 
     public static void main(String[] args) {
         seguradoras = new ArrayList<>();
-        // seguradora = new Seguradora(
-        // "SeguradoraSegura",
-        // "(71) 99999-9999",
-        // "seguradora@segura.com",
-        // "Avenida Segura 221");
+        Seguradora seguradora = new Seguradora(
+                "SeguradoraSegura",
+                "(71) 99999-9999",
+                "seguradora@segura.com",
+                "Avenida Segura 221");
+        seguradoras.add(seguradora);
 
-        // ArrayList<Veiculo> veiculos_lucca = new ArrayList<>();
-        // veiculos_lucca.add(new Veiculo("666", "Ferrari", "Corsa", 2018));
-        // veiculos_lucca.add(new Veiculo("777", "Fiat", "Palio", 2002));
-        // ClientePF lucca = new ClientePF(
-        // "Lucca",
-        // "Rua Lindo 221B",
-        // LocalDate.of(2022, Month.JULY, 8),
-        // "Muito educado",
-        // "Suspense",
-        // "Quebrado",
-        // veiculos_lucca,
-        // "070.680.938-68",
-        // LocalDate.of(2004, Month.JULY, 7));
-        // seguradora.cadastrarCliente(lucca);
+        ArrayList<Veiculo> veiculos_lucca = new ArrayList<>();
+        veiculos_lucca.add(new Veiculo("666", "Ferrari", "Corsa", 2018));
+        veiculos_lucca.add(new Veiculo("777", "Fiat", "Palio", 2002));
+        ClientePF lucca = new ClientePF(
+                "Lucca",
+                "Rua Lindo 221B",
+                LocalDate.of(2022, Month.JULY, 8),
+                "Muito educado",
+                "Suspense",
+                "Quebrado",
+                veiculos_lucca,
+                "070.680.938-68",
+                LocalDate.of(2004, Month.JULY, 7));
+        seguradora.cadastrarCliente(lucca);
+
+        ArrayList<Veiculo> veiculos_unicamp = new ArrayList<>();
+        veiculos_unicamp.add(new Veiculo("123", "BMW", "Gol", 1999));
+        veiculos_unicamp.add(new Veiculo("321XXX", "Fiat", "Siena", 2007));
+        ClientePJ unicamp = new ClientePJ(
+                "Unicamp",
+                "Avenida Albert Einstein 314",
+                LocalDate.of(1966, Month.OCTOBER, 5),
+                veiculos_unicamp,
+                "46.068.425/0001-33", 25);
+        seguradora.cadastrarCliente(unicamp);
+
+        seguradora.gerarSinistro(
+                lucca.getListaVeiculos().get(0),
+                lucca,
+                "Rua Saturnino de Brito");
+        seguradora.gerarSinistro(
+                lucca.getListaVeiculos().get(1),
+                lucca,
+                "Rua Chico Buarque de Holanda");
+        seguradora.gerarSinistro(
+                unicamp.getListaVeiculos().get(0),
+                unicamp,
+                "Rua Roxo Moreira");
 
         menuInterativo();
-
-        // Scanner scan = new Scanner(System.in);
-
-        // int a = scan.nextInt();
-
-        // System.out.println(a);
-
-        // scan.close();
     }
 }
