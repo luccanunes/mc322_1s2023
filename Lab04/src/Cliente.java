@@ -21,6 +21,10 @@ public class Cliente {
             listaVeiculos.remove(indice);
     }
 
+    public void adicionarVeiculo(Veiculo veiculo) {
+        listaVeiculos.add(veiculo);
+    }
+
     public double calculaScore() {
         return 1.0;
     }

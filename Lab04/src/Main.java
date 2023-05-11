@@ -2,12 +2,17 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static ArrayList<Seguradora> seguradoras;
 
     public static Seguradora encontrar_seguradora(String nome) {
+        /*
+         * Encontra e retorna uma seguradora na lista
+         * de acordo com o nome
+         */
         for (Seguradora seguradora : seguradoras) {
             if (seguradora.getNome().equals(nome)) {
                 return seguradora;
@@ -16,7 +21,22 @@ public class Main {
         return null;
     }
 
+    public static Seguradora perguntar_seguradora(Scanner scan) {
+        /*
+         * Lê o nome de uma seguradora e retorna a seguradora
+         * correspondente
+         */
+        String nome_seguradora;
+        System.out.println("Seguradora:");
+        nome_seguradora = scan.nextLine();
+        return encontrar_seguradora(nome_seguradora);
+    }
+
     public static Veiculo ler_veiculo(Scanner scan) {
+        /*
+         * Lê os dados de um veículo e retorna
+         * um objeto Veiculo correspondente
+         */
         String placa, marca, modelo;
         int anoFabricacao;
         System.out.println("Placa:");
@@ -31,6 +51,10 @@ public class Main {
     }
 
     public static Seguradora ler_seguradora(Scanner scan) {
+        /*
+         * Lê os dados de uma seguradora e retorna
+         * um objeto Seguradora correspondente
+         */
         String nome, telefone, email, endereco;
         System.out.println("Nome:");
         nome = scan.nextLine();
@@ -44,16 +68,28 @@ public class Main {
     }
 
     public static ClientePJ ler_cliente_pj(Scanner scan) {
+        /*
+         * Lê os dados de um cliente PJ e retorna
+         * um objeto ClientePJ correspondente
+         */
         String nome, endereco, data, cnpj;
         int qtd_funcionarios;
         System.out.println("Nome:");
         nome = scan.nextLine();
+        if (!Validacao.validaNome(nome)) {
+            System.out.println("Nome inválido!");
+            System.exit(0);
+        }
         System.out.println("Endereço:");
         endereco = scan.nextLine();
         System.out.println("Data de fundação: ");
         data = scan.nextLine();
         System.out.println("CNPJ: ");
         cnpj = scan.nextLine();
+        if (!Validacao.validarCNPJ(cnpj)) {
+            System.out.println("CNPJ inválido!");
+            System.exit(0);
+        }
         System.out.println("Quantidade de funcionários: ");
         qtd_funcionarios = Integer.parseInt(scan.nextLine());
         return new ClientePJ(nome, endereco,
@@ -62,9 +98,17 @@ public class Main {
     }
 
     public static ClientePF ler_cliente_pf(Scanner scan) {
+        /*
+         * Lê os dados de um cliente PF e retorna
+         * um objeto ClientePF correspondente
+         */
         String nome, endereco, data_licensa, data_nascimento, educacao, genero, classe_economica, cpf;
         System.out.println("Nome: ");
         nome = scan.nextLine();
+        if (!Validacao.validaNome(nome)) {
+            System.out.println("Nome inválido!");
+            System.exit(0);
+        }
         System.out.println("Endereço: ");
         endereco = scan.nextLine();
         System.out.println("Data de licensa: ");
@@ -79,6 +123,10 @@ public class Main {
         genero = scan.nextLine();
         System.out.println("CPF: ");
         cpf = scan.nextLine();
+        if (!Validacao.validarCPF(cpf)) {
+            System.out.println("CPF inválido!");
+            System.exit(0);
+        }
         return new ClientePF(nome, endereco,
                 LocalDate.parse(data_licensa, DateTimeFormatter.ofPattern("d/MM/yyyy")),
                 educacao,
@@ -109,55 +157,28 @@ public class Main {
                     System.out.println("(5) Voltar");
                     entrada = Integer.parseInt(scan.nextLine());
                     switch (entrada) {
-                        case 1: {
-                            String nome_seguradora;
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
+                        case 1: { // Cadastrar cliente PJ
+                            Seguradora seguradora = perguntar_seguradora(scan);
                             ClientePJ cliente = ler_cliente_pj(scan);
-                            for (Seguradora seguradora : seguradoras) {
-                                if (seguradora.getNome().equals(nome_seguradora)) {
-                                    seguradora.cadastrarCliente(cliente);
-                                    break;
-                                }
-                            }
+                            seguradora.cadastrarCliente(cliente);
                             break;
                         }
-                        case 2: {
-                            String nome_seguradora;
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
+                        case 2: { // Cadastrar cliente PF
+                            Seguradora seguradora = perguntar_seguradora(scan);
                             ClientePF cliente = ler_cliente_pf(scan);
-                            for (Seguradora seguradora : seguradoras) {
-                                if (seguradora.getNome().equals(nome_seguradora)) {
-                                    seguradora.cadastrarCliente(cliente);
-                                    break;
-                                }
-                            }
+                            seguradora.cadastrarCliente(cliente);
                             break;
                         }
-                        case 3: {
-                            String nome_cliente, nome_seguradora;
+                        case 3: { // Cadastrar veículo
+                            String nome_cliente;
                             System.out.println("Nome do cliente:");
                             nome_cliente = scan.nextLine();
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
+                            Seguradora seguradora = perguntar_seguradora(scan);
                             Veiculo veiculo = ler_veiculo(scan);
-                            for (Seguradora seguradora : seguradoras) {
-                                if (seguradora.getNome().equals(nome_seguradora)) {
-                                    for (Cliente cliente : seguradora.getListaClientes()) {
-                                        if (cliente.getNome().equals(nome_cliente)) {
-                                            ArrayList<Veiculo> nova_lista = cliente.getListaVeiculos();
-                                            nova_lista.add(veiculo);
-                                            cliente.setListaVeiculos(nova_lista);
-                                            break;
-                                        }
-                                    }
-                                    break;
-                                }
-                            }
+                            seguradora.encontrarCliente(nome_cliente).adicionarVeiculo(veiculo);
                             break;
                         }
-                        case 4: {
+                        case 4: { // Cadastrar seguradora
                             seguradoras.add(ler_seguradora(scan));
                             break;
                         }
@@ -173,21 +194,15 @@ public class Main {
                     System.out.println("(6) Voltar");
                     entrada = Integer.parseInt(scan.nextLine());
                     switch (entrada) {
-                        case 1: {
-                            String nome_seguradora;
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
-                            encontrar_seguradora(nome_seguradora).listarClientes("PJ");
+                        case 1: { // Listar clientes PJ
+                            perguntar_seguradora(scan).listarClientes("PJ");
                             break;
                         }
-                        case 2: {
-                            String nome_seguradora;
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
-                            encontrar_seguradora(nome_seguradora).listarClientes("PF");
+                        case 2: { // Listar clientes PJ
+                            perguntar_seguradora(scan).listarClientes("PF");
                             break;
                         }
-                        case 3: {
+                        case 3: { // Listar sinistros por cliente
                             String nome_cliente;
                             System.out.println("Nome do cliente:");
                             nome_cliente = scan.nextLine();
@@ -196,27 +211,23 @@ public class Main {
                             }
                             break;
                         }
-                        case 4: {
+                        case 4: { // Listar veículos por cliente
                             String nome_cliente;
                             System.out.println("Nome do cliente:");
                             nome_cliente = scan.nextLine();
                             for (Seguradora seguradora : seguradoras) {
-                                for (Cliente cliente : seguradora.getListaClientes()) {
-                                    if (cliente.getNome().equals(nome_cliente)) {
-                                        for (Veiculo veiculo : cliente.getListaVeiculos()) {
-                                            System.out.println(veiculo);
-                                        }
+                                Cliente cliente = seguradora.encontrarCliente(nome_cliente);
+                                if (Objects.nonNull(cliente)) {
+                                    for (Veiculo veiculo : cliente.getListaVeiculos()) {
+                                        System.out.println(veiculo);
                                     }
                                 }
                                 break;
                             }
                             break;
                         }
-                        case 5: {
-                            String nome_seguradora;
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
-                            Seguradora seguradora = encontrar_seguradora(nome_seguradora);
+                        case 5: { // Listar veículos por seguradora
+                            Seguradora seguradora = perguntar_seguradora(scan);
                             for (Cliente cliente : seguradora.getListaClientes()) {
                                 for (Veiculo veiculo : cliente.getListaVeiculos()) {
                                     System.out.println(veiculo);
@@ -234,29 +245,29 @@ public class Main {
                     System.out.println("(4) Voltar");
                     entrada = Integer.parseInt(scan.nextLine());
                     switch (entrada) {
-                        case 1: {
-                            String nome_seguradora, nome_cliente;
+                        case 1: { // Excluir cliente
+                            String nome_cliente;
                             System.out.println("Nome do cliente:");
                             nome_cliente = scan.nextLine();
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
-                            Seguradora seguradora = encontrar_seguradora(nome_seguradora);
-                            seguradora.removerCliente(nome_cliente);
+                            perguntar_seguradora(scan).removerCliente(nome_cliente);
                         }
-                        case 2: {
+                        case 2: { // Excluir veículo
                             String placa;
                             System.out.println("Placa do veículo:");
                             placa = scan.nextLine();
-                            for (Seguradora seguradora : seguradoras) {
+                            for (Seguradora seguradora : seguradoras) { // Para toda seguradora
                                 ArrayList<Integer> indices_sinistro = new ArrayList<>();
+                                // Procura os sinistros associados ao veículo
                                 for (int i = 0; i < seguradora.getListaSinistros().size(); ++i) {
                                     Sinistro sinistro = seguradora.getListaSinistros().get(i);
                                     if (sinistro.getVeiculo().getPlaca().equals(placa)) {
                                         indices_sinistro.add(i);
                                     }
                                 }
+                                // Remove os sinistros
                                 for (int i : indices_sinistro)
                                     seguradora.removerSinistro(i);
+                                // Procura os clientes que têm esse veículo
                                 for (int i = 0; i < seguradora.getListaClientes().size(); ++i) {
                                     boolean tem_o_veiculo = false;
                                     Cliente cliente = seguradora.getListaClientes().get(i);
@@ -266,36 +277,71 @@ public class Main {
                                             break;
                                         }
                                     }
+                                    // Remove o veículo da lista
                                     if (tem_o_veiculo)
                                         cliente.removerVeiculo(placa);
                                 }
                             }
                         }
-                        case 3: {
-                            String nome_seguradora;
-                            System.out.println("Seguradora:");
-                            nome_seguradora = scan.nextLine();
-                            Seguradora seguradora = encontrar_seguradora(nome_seguradora);
+                        case 3: { // Excluir sinistro
+                            Seguradora seguradora = perguntar_seguradora(scan);
                             int id_sinistro, indice_sinistro = -1;
                             System.out.println("ID do sinistro:");
                             id_sinistro = Integer.parseInt(scan.nextLine());
                             for (int i = 0; i < seguradora.getListaSinistros().size(); ++i) {
+                                // Procura o sinistro nas seguradoras
                                 if (seguradora.getListaSinistros().get(i).getId() == id_sinistro) {
-                                    indice_sinistro = i;
+                                    indice_sinistro = i; // Guarda o índice para apagar
                                     break;
                                 }
                             }
-                            seguradora.removerSinistro(indice_sinistro);
+                            seguradora.removerSinistro(indice_sinistro); // E apaga
                         }
                     }
                     break;
                 }
-                case GERAR_SINISTRO:
+                case GERAR_SINISTRO: {
+                    Seguradora seguradora = perguntar_seguradora(scan);
+                    Veiculo veiculo = ler_veiculo(scan);
+                    String endereco, nome_cliente;
+                    System.out.println("Endereço: ");
+                    endereco = scan.nextLine();
+                    System.out.println("Nome do cliente: ");
+                    nome_cliente = scan.nextLine();
+                    boolean cliente_existe = false;
+                    for (Cliente cliente : seguradora.getListaClientes()) {
+                        if (cliente.getNome().equals(nome_cliente)) {
+                            seguradora.gerarSinistro(veiculo, cliente, endereco);
+                            seguradora.calcularPrecoSeguroCliente(cliente);
+                            cliente_existe = true;
+                            break;
+                        }
+                    }
+                    if (!cliente_existe) {
+                        System.out.println("Cliente não cadastrado!");
+                    }
                     break;
-                case TRANSFERIR_SEGURO:
+                }
+                case TRANSFERIR_SEGURO: {
+                    Seguradora seguradora = perguntar_seguradora(scan);
+                    String nome_doador, nome_receptor;
+                    System.out.println("Nome do cliente que fará a transferência:");
+                    nome_doador = scan.nextLine();
+                    System.out.println("Nome do cliente que receberá a transferência:");
+                    nome_receptor = scan.nextLine();
+                    Cliente doador = seguradora.encontrarCliente(nome_doador);
+                    Cliente receptor = seguradora.encontrarCliente(nome_receptor);
+                    for (Veiculo veiculo : doador.getListaVeiculos()) {
+                        receptor.adicionarVeiculo(veiculo);
+                    }
+                    doador.setListaVeiculos(new ArrayList<>());
+                    seguradora.calcularPrecoSeguroCliente(doador);
+                    seguradora.calcularPrecoSeguroCliente(receptor);
                     break;
+                }
                 case CALCULAR_RECEITA: {
-
+                    Seguradora seguradora = perguntar_seguradora(scan);
+                    System.out.println("Receita seguradora: " + seguradora.calcularReceita());
                     break;
                 }
             }
@@ -305,6 +351,7 @@ public class Main {
 
     public static void main(String[] args) {
         seguradoras = new ArrayList<>();
+        // Instancia seguradora
         Seguradora seguradora = new Seguradora(
                 "SeguradoraSegura",
                 "(71) 99999-9999",
@@ -312,6 +359,7 @@ public class Main {
                 "Avenida Segura 221");
         seguradoras.add(seguradora);
 
+        // Instancia clientes teste
         ArrayList<Veiculo> veiculos_lucca = new ArrayList<>();
         veiculos_lucca.add(new Veiculo("666", "Ferrari", "Corsa", 2018));
         veiculos_lucca.add(new Veiculo("777", "Fiat", "Palio", 2002));
@@ -338,6 +386,7 @@ public class Main {
                 "46.068.425/0001-33", 25);
         seguradora.cadastrarCliente(unicamp);
 
+        // Gera sinistros
         seguradora.gerarSinistro(
                 lucca.getListaVeiculos().get(0),
                 lucca,

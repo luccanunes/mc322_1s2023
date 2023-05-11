@@ -46,6 +46,15 @@ public class Seguradora {
         return false;
     }
 
+    public Cliente encontrarCliente(String nome_cliente) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getNome().equals(nome_cliente)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
     public boolean removerCliente(String cliente) {
         // Retorna false se o cliente não está registrado
         // Do contrário, retorna true
@@ -130,7 +139,7 @@ public class Seguradora {
         // Retorna a soma dos valores do seguro de cada cliente
         double receita = 0;
         for (Cliente cliente : listaClientes) {
-            receita += this.calcularPrecoSeguroCliente(cliente);
+            receita += cliente.getValorSeguro();
         }
         return receita;
     }
