@@ -312,17 +312,12 @@ public class Main {
                     endereco = scan.nextLine();
                     System.out.println("Nome do cliente:");
                     nome_cliente = scan.nextLine();
-                    boolean cliente_existe = false;
-                    for (Cliente cliente : seguradora.getListaClientes()) {
-                        if (cliente.getNome().equals(nome_cliente)) {
-                            seguradora.gerarSinistro(veiculo, cliente, endereco);
-                            seguradora.calcularPrecoSeguroCliente(cliente);
-                            cliente_existe = true;
-                            break;
-                        }
-                    }
-                    if (!cliente_existe) {
+                    Cliente cliente = seguradora.encontrarCliente(nome_cliente);
+                    if (!Objects.nonNull(cliente)) {
                         System.out.println("Cliente não cadastrado!");
+                    } else {
+                        seguradora.gerarSinistro(veiculo, cliente, endereco);
+                        seguradora.calcularPrecoSeguroCliente(cliente);
                     }
                     break;
                 }
