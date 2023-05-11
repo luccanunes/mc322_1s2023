@@ -404,6 +404,17 @@ public class Main {
                 unicamp,
                 "Rua Roxo Moreira");
 
+        // Chamar os métodos
+
+        seguradora.listarClientes("PF");
+        seguradora.listarClientes("PJ");
+        seguradora.visualizarSinistro("Lucca");
+        seguradora.listarSinistros();
+        for (Cliente cliente : seguradora.getListaClientes()) {
+            seguradora.calcularPrecoSeguroCliente(cliente);
+        }
+        System.out.println("Receita: " + seguradora.calcularReceita());
+
         menuInterativo();
     }
 }
