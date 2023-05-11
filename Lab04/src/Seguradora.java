@@ -35,10 +35,14 @@ public class Seguradora {
             }
         }
         listaClientes.add(cliente);
+        this.calcularPrecoSeguroCliente(cliente);
         return false;
     }
 
     public boolean removerSinistro(int indice) {
+        /*
+         * Remove o sinistro desejado da lista de sinistros
+         */
         if (0 <= indice && indice < listaSinistros.size()) {
             listaSinistros.remove(indice);
             return true;
@@ -47,6 +51,10 @@ public class Seguradora {
     }
 
     public Cliente encontrarCliente(String nome_cliente) {
+        /*
+         * Encontra e retorna o cliente de acordo com o nome
+         * Se o cliente não estiver cadastrado, retorna null
+         */
         for (Cliente cliente : listaClientes) {
             if (cliente.getNome().equals(nome_cliente)) {
                 return cliente;
@@ -139,7 +147,7 @@ public class Seguradora {
         // Retorna a soma dos valores do seguro de cada cliente
         double receita = 0;
         for (Cliente cliente : listaClientes) {
-            receita += cliente.getValorSeguro();
+            receita += this.calcularPrecoSeguroCliente(cliente);
         }
         return receita;
     }

@@ -13,6 +13,10 @@ public class Cliente {
     }
 
     public void removerVeiculo(String placa) {
+        /*
+         * Remove um veículo da lista de veículos
+         * de acordo com a placa
+         */
         int indice = -1;
         for (int i = 0; i < listaVeiculos.size(); ++i)
             if (listaVeiculos.get(i).getPlaca().equals(placa))
@@ -22,12 +26,20 @@ public class Cliente {
     }
 
     public void adicionarVeiculo(Veiculo veiculo) {
+        /*
+         * Adiciona um veículo à lista de veículos
+         */
         listaVeiculos.add(veiculo);
     }
 
     public double calculaScore() {
+        /*
+         * Vai ser sobrescrito pelas classes filhas
+         */
         return 1.0;
     }
+
+    /* Getters e Setters */
 
     public ArrayList<Veiculo> getListaVeiculos() {
         return listaVeiculos;

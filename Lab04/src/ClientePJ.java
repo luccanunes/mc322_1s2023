@@ -23,6 +23,7 @@ public class ClientePJ extends Cliente {
     }
 
     public double calculaScore() {
+        /* Calcula o score baseado na quantidade de funcionários e de veículos */
         return CalcSeguro.VALOR_BASE.getx() * (1 + qtdFuncionarios / 100.0) * this.getListaVeiculos().size();
     }
 

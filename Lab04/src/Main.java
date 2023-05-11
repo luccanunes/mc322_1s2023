@@ -27,7 +27,7 @@ public class Main {
          * correspondente
          */
         String nome_seguradora;
-        System.out.println("Seguradora:");
+        System.out.println("Nome da seguradora:");
         nome_seguradora = scan.nextLine();
         return encontrar_seguradora(nome_seguradora);
     }
@@ -39,13 +39,13 @@ public class Main {
          */
         String placa, marca, modelo;
         int anoFabricacao;
-        System.out.println("Placa:");
+        System.out.println("Placa do veículo:");
         placa = scan.nextLine();
-        System.out.println("Marca:");
+        System.out.println("Marca do veículo:");
         marca = scan.nextLine();
-        System.out.println("Modelo:");
+        System.out.println("Modelo do veículo:");
         modelo = scan.nextLine();
-        System.out.println("Ano fabricação:");
+        System.out.println("Ano fabricação do veículo:");
         anoFabricacao = Integer.parseInt(scan.nextLine());
         return new Veiculo(placa, marca, modelo, anoFabricacao);
     }
@@ -56,13 +56,13 @@ public class Main {
          * um objeto Seguradora correspondente
          */
         String nome, telefone, email, endereco;
-        System.out.println("Nome:");
+        System.out.println("Nome da seguradora:");
         nome = scan.nextLine();
-        System.out.println("Telefone:");
+        System.out.println("Telefone da seguradora:");
         telefone = scan.nextLine();
-        System.out.println("Email:");
+        System.out.println("Email da seguradora:");
         email = scan.nextLine();
-        System.out.println("Endereço:");
+        System.out.println("Endereço da seguradora:");
         endereco = scan.nextLine();
         return new Seguradora(nome, telefone, email, endereco);
     }
@@ -74,15 +74,15 @@ public class Main {
          */
         String nome, endereco, data, cnpj;
         int qtd_funcionarios;
-        System.out.println("Nome:");
+        System.out.println("Nome do cliente:");
         nome = scan.nextLine();
         if (!Validacao.validaNome(nome)) {
             System.out.println("Nome inválido!");
             System.exit(0);
         }
-        System.out.println("Endereço:");
+        System.out.println("Endereço do cliente:");
         endereco = scan.nextLine();
-        System.out.println("Data de fundação: ");
+        System.out.println("Data de fundação do cliente:");
         data = scan.nextLine();
         System.out.println("CNPJ: ");
         cnpj = scan.nextLine();
@@ -90,7 +90,7 @@ public class Main {
             System.out.println("CNPJ inválido!");
             System.exit(0);
         }
-        System.out.println("Quantidade de funcionários: ");
+        System.out.println("Quantidade de funcionários do cliente:");
         qtd_funcionarios = Integer.parseInt(scan.nextLine());
         return new ClientePJ(nome, endereco,
                 LocalDate.parse(data, DateTimeFormatter.ofPattern("d/MM/yyyy")), null,
@@ -102,33 +102,33 @@ public class Main {
          * Lê os dados de um cliente PF e retorna
          * um objeto ClientePF correspondente
          */
-        String nome, endereco, data_licensa, data_nascimento, educacao, genero, classe_economica, cpf;
-        System.out.println("Nome: ");
+        String nome, endereco, data_licenca, data_nascimento, educacao, genero, classe_economica, cpf;
+        System.out.println("Nome do cliente:");
         nome = scan.nextLine();
         if (!Validacao.validaNome(nome)) {
             System.out.println("Nome inválido!");
             System.exit(0);
         }
-        System.out.println("Endereço: ");
+        System.out.println("Endereço do cliente:");
         endereco = scan.nextLine();
-        System.out.println("Data de licensa: ");
-        data_licensa = scan.nextLine();
-        System.out.println("Data de nascimento: ");
+        System.out.println("Data da licença do cliente:");
+        data_licenca = scan.nextLine();
+        System.out.println("Data de nascimento do cliente:");
         data_nascimento = scan.nextLine();
         System.out.println("Educação: ");
         educacao = scan.nextLine();
-        System.out.println("Classe econômica: ");
+        System.out.println("Classe econômica do cliente:");
         classe_economica = scan.nextLine();
-        System.out.println("Gênero: ");
+        System.out.println("Gênero do cliente:");
         genero = scan.nextLine();
-        System.out.println("CPF: ");
+        System.out.println("CPF do cliente:");
         cpf = scan.nextLine();
         if (!Validacao.validarCPF(cpf)) {
             System.out.println("CPF inválido!");
             System.exit(0);
         }
         return new ClientePF(nome, endereco,
-                LocalDate.parse(data_licensa, DateTimeFormatter.ofPattern("d/MM/yyyy")),
+                LocalDate.parse(data_licenca, DateTimeFormatter.ofPattern("d/MM/yyyy")),
                 educacao,
                 genero,
                 classe_economica,
@@ -143,9 +143,13 @@ public class Main {
 
         MenuOperacoes comando = MenuOperacoes.CADASTRAR;
         while (comando != MenuOperacoes.SAIR) {
-            for (MenuOperacoes op : MenuOperacoes.values()) {
-                System.out.println("(" + op.operacao + ") " + op);
-            }
+            System.out.println("(1) Cadastrar");
+            System.out.println("(2) Listar");
+            System.out.println("(3) Excluir");
+            System.out.println("(4) Gerar sinistros");
+            System.out.println("(5) Transferir seguro");
+            System.out.println("(6) Calcular receita");
+            System.out.println("(0) Sair");
             int entrada = Integer.parseInt(scan.nextLine());
             comando = MenuOperacoes.values()[entrada];
             switch (comando) {
@@ -304,9 +308,9 @@ public class Main {
                     Seguradora seguradora = perguntar_seguradora(scan);
                     Veiculo veiculo = ler_veiculo(scan);
                     String endereco, nome_cliente;
-                    System.out.println("Endereço: ");
+                    System.out.println("Endereço do sinistro:");
                     endereco = scan.nextLine();
-                    System.out.println("Nome do cliente: ");
+                    System.out.println("Nome do cliente:");
                     nome_cliente = scan.nextLine();
                     boolean cliente_existe = false;
                     for (Cliente cliente : seguradora.getListaClientes()) {

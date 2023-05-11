@@ -38,6 +38,9 @@ public class ClientePF extends Cliente {
     }
 
     public double calculaScore() {
+        /*
+         * Calcula o score do cliente com base na sua idade
+         */
         double FATOR_IDADE = 0;
         int idade = this.getIdade();
         if (18 <= idade && idade <= 30) {
