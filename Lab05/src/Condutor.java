@@ -26,6 +26,13 @@ public class Condutor {
         listaSinistros.add(sinistro);
     }
 
+    public String toString() {
+        return "-----Condutor " + this.getNome() + "-----\n" +
+                "CPF: " + this.getCpf() +
+                "\nEmail: " + this.getEmail() +
+                "\nTelefone: " + this.getTelefone();
+    }
+
     /* Getters e setters */
 
     public String getCpf() {

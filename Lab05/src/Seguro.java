@@ -21,6 +21,13 @@ public abstract class Seguro {
         calcularValor();
     }
 
+    public String toString() {
+        return "-----Seguro " + this.getId() + "-----\n" +
+                "Seguradora: " + this.getSeguradora().getNome() +
+                "\nData de início: " + this.getDataInicio() +
+                "\nData de fim: " + this.getDataFim();
+    }
+
     private int gerarId() {
         // Gera um identificador para o sinistro
         return (new Random()).nextInt();

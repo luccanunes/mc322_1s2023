@@ -104,7 +104,7 @@ public class Main {
          * Lê os dados de um cliente PF e retorna
          * um objeto ClientePF correspondente
          */
-        String nome, endereco, data_licenca, data_nascimento, educacao, genero, classe_economica, cpf;
+        String nome, endereco, data_licenca, data_nascimento, educacao, genero, telefone, cpf;
         System.out.println("Nome do cliente:");
         nome = scan.nextLine();
         if (!Validacao.validaNome(nome)) {
@@ -119,8 +119,8 @@ public class Main {
         data_nascimento = scan.nextLine();
         System.out.println("Educação: ");
         educacao = scan.nextLine();
-        System.out.println("Classe econômica do cliente:");
-        classe_economica = scan.nextLine();
+        System.out.println("Telefone:");
+        telefone = scan.nextLine();
         System.out.println("Gênero do cliente:");
         genero = scan.nextLine();
         System.out.println("CPF do cliente:");
@@ -133,8 +133,7 @@ public class Main {
                 LocalDate.parse(data_licenca, DateTimeFormatter.ofPattern("d/MM/yyyy")),
                 educacao,
                 genero,
-                classe_economica,
-                null,
+                telefone,
                 cpf,
                 LocalDate.parse(data_nascimento, DateTimeFormatter.ofPattern("d/MM/yyyy")));
     }
@@ -371,8 +370,7 @@ public class Main {
                 LocalDate.of(2022, Month.JULY, 8),
                 "Muito educado",
                 "Suspense",
-                "Quebrado",
-                veiculos_lucca,
+                "(71) 9 9999-999",
                 "070.680.938-68",
                 LocalDate.of(2004, Month.JULY, 7));
         seguradora.cadastrarCliente(lucca);
@@ -384,7 +382,7 @@ public class Main {
                 "Unicamp",
                 "Avenida Albert Einstein 314",
                 LocalDate.of(1966, Month.OCTOBER, 5),
-                veiculos_unicamp,
+                "(19) 9 8888-8888",
                 "46.068.425/0001-33", 25);
         seguradora.cadastrarCliente(unicamp);
 

@@ -12,6 +12,15 @@ public class SeguroPF extends Seguro {
         this.cliente = cliente;
     }
 
+    public String toString() {
+        return "-----Seguro " + this.getId() + "-----\n" +
+                "Seguradora: " + this.getSeguradora().getNome() +
+                "\nCliente: " + this.getCliente().getNome() +
+                "\nData de início: " + this.getDataInicio() +
+                "\nData de fim: " + this.getDataFim() +
+                "\nVeiculo: " + this.getVeiculo().getPlaca();
+    }
+
     public void calcularValor() {
         double FATOR_IDADE = 0;
         int idade = Period.between(cliente.getDataNascimento(), LocalDate.now()).getYears();

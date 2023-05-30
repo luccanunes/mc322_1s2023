@@ -29,6 +29,13 @@ public class Frota {
         listaVeiculos.add(veiculo);
     }
 
+    public String toString() {
+        String res = "-----Frota " + codigo + "-----\nVeículos:\n";
+        for (Veiculo veiculo : listaVeiculos)
+            res += veiculo.toString();
+        return res;
+    }
+
     /* Getters e setters */
 
     public String getCodigo() {

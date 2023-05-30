@@ -12,6 +12,15 @@ public class SeguroPJ extends Seguro {
         this.cliente = cliente;
     }
 
+    public String toString() {
+        return "-----Seguro " + this.getId() + "-----\n" +
+                "Seguradora: " + this.getSeguradora().getNome() +
+                "\nCliente: " + this.getCliente().getNome() +
+                "\nData de início: " + this.getDataInicio() +
+                "\nData de fim: " + this.getDataFim() +
+                "\nFrota: " + this.getFrota().getCodigo();
+    }
+
     public void calcularValor() {
         int idade = Period.between(cliente.getDataFundacao(), LocalDate.now()).getYears();
         double qtdFunc = cliente.getQtdFuncionarios();
