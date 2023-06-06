@@ -6,7 +6,7 @@ public class Sinistro {
     private String endereco;
     private Seguradora seguradora;
     private Veiculo veiculo;
-    private Cliente cliente;
+    private Condutor condutor;
 
     private final int id;
 
@@ -15,12 +15,12 @@ public class Sinistro {
         return (new Random()).nextInt();
     }
 
-    public Sinistro(LocalDate data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
+    public Sinistro(LocalDate data, String endereco, Seguradora seguradora, Veiculo veiculo, Condutor condutor) {
         this.data = data;
         this.endereco = endereco;
         this.seguradora = seguradora;
         this.veiculo = veiculo;
-        this.cliente = cliente;
+        this.condutor = condutor;
         this.id = gerarId();
     }
 
@@ -29,7 +29,7 @@ public class Sinistro {
                 + "\nEndereço: " + this.endereco
                 + "\nSeguradora: " + this.seguradora.getNome()
                 + "\nVeiculo: " + this.veiculo
-                + "\nCliente: " + this.cliente.getNome()
+                + "\nCliente: " + this.condutor.getNome()
                 + "\n---------------";
     }
 
@@ -51,12 +51,12 @@ public class Sinistro {
         this.veiculo = veiculo;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Condutor getCondutor() {
+        return condutor;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCondutor(Condutor condutor) {
+        this.condutor = condutor;
     }
 
     public LocalDate getData() {

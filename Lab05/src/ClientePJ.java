@@ -8,8 +8,8 @@ public class ClientePJ extends Cliente {
     private ArrayList<Frota> listaFrotas;
 
     public ClientePJ(String nome, String endereco, LocalDate dataFundacao,
-            String telefone, String cnpj, int qtdFuncionarios) {
-        super(nome, endereco, telefone);
+            String telefone, String cnpj, int qtdFuncionarios, String email) {
+        super(nome, endereco, telefone, email);
         this.cnpj = cnpj;
         this.dataFundacao = dataFundacao;
         this.qtdFuncionarios = qtdFuncionarios;
@@ -25,6 +25,11 @@ public class ClientePJ extends Cliente {
     }
 
     public boolean cadastrarFrota(Frota frota) {
+        /*
+         * Adiciona a frota passada à lista de frotas
+         * Retorna false caso a frota já esteja cadastrada
+         * e true do contrário
+         */
         for (Frota f : listaFrotas)
             if (f.getCodigo().equals(frota.getCodigo()))
                 return false;
@@ -33,6 +38,12 @@ public class ClientePJ extends Cliente {
     }
 
     public boolean atualizarFrota(String codigo, ArrayList<Veiculo> novaListaVeiculos) {
+        /*
+         * Atualiza a lista de veículos da frota
+         * em questão.
+         * Retorna false caso a frota não esteja cadastrada
+         * e true do contrário
+         */
         for (Frota frota : listaFrotas) {
             if (frota.getCodigo().equals(codigo)) {
                 if (novaListaVeiculos.size() == 0)
@@ -46,6 +57,11 @@ public class ClientePJ extends Cliente {
     }
 
     public ArrayList<Veiculo> getVeiculosPorFrota(String codigo) {
+        /*
+         * Retorna a lista de veículos da frota em questão.
+         * Retorna uma lista vazia caso a frota não esteja
+         * cadastrada.
+         */
         for (Frota frota : listaFrotas)
             if (frota.getCodigo().equals(codigo))
                 return frota.getListaVeiculos();

@@ -30,10 +30,14 @@ public class Seguradora {
     }
 
     public void gerarSeguro(Seguro seguro) {
+        // Adiciona o seguro na lista de seguros
         listaSeguros.add(seguro);
     }
 
     public boolean cancelarSeguro(int id) {
+        // Remove o seguro da lista de seguros
+        // Retorna true se o seguro estava na lista
+        // e false do contrario
         for (int i = 0; i < listaSeguros.size(); ++i) {
             Seguro seguro = listaSeguros.get(i);
             if (seguro.getId() == id) {
@@ -45,6 +49,8 @@ public class Seguradora {
     }
 
     public ArrayList<Seguro> getSegurosPorCliente(String nome_cliente) {
+        // Retorna uma lista com todos os seguros associados
+        // ao cliente em questão
         ArrayList<Seguro> lista = new ArrayList<>();
         for (Seguro seguro : this.getListaSeguros())
             if (seguro.getCliente().getNome().equals(nome_cliente))
@@ -53,6 +59,8 @@ public class Seguradora {
     }
 
     public ArrayList<Sinistro> getSinistrosPorCliente(String nome_cliente) {
+        // Retorna uma lista com todos os sinistros associados
+        // ao cliente em questão
         ArrayList<Sinistro> lista = new ArrayList<>();
         for (Seguro seguro : this.getListaSeguros())
             if (seguro.getCliente().getNome().equals(nome_cliente))
@@ -112,11 +120,11 @@ public class Seguradora {
     }
 
     public double calcularReceita() {
-        // Retorna a soma dos valores do seguro de cada cliente
+        // Retorna a soma dos valores do valor mensal de cada seguro
         double receita = 0;
-        // for (Cliente cliente : listaClientes) {
-        // receita += this.calcularPrecoSeguroCliente(cliente);
-        // }
+        for (Seguro seguro : listaSeguros) {
+            receita += seguro.getValorMensal();
+        }
         return receita;
     }
 

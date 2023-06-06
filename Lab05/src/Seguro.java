@@ -34,6 +34,11 @@ public abstract class Seguro {
     }
 
     public boolean autorizarCondutor(Condutor condutor) {
+        /*
+         * Adiciona um condutor à lista de condutores autorizados.
+         * Retorna false se o condutor já está autorizado e true
+         * do contrário.
+         */
         for (Condutor c : listaCondutores)
             if (c.equals(condutor))
                 return false;
@@ -42,6 +47,11 @@ public abstract class Seguro {
     }
 
     public boolean desautorizarCondutor(Condutor condutor) {
+        /*
+         * Remove um condutor da lista de condutores autorizados.
+         * Retorna false se o condutor já está desautorizado e true
+         * do contrário.
+         */
         for (Condutor c : listaCondutores)
             if (c.equals(condutor)) {
                 listaCondutores.remove(condutor);
@@ -51,6 +61,9 @@ public abstract class Seguro {
     }
 
     public void gerarSinistro(Sinistro sinistro) {
+        /*
+         * Adiciona um sinistro à lista de sinistros
+         */
         listaSinistros.add(sinistro);
     }
 

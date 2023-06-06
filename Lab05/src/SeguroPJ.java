@@ -22,6 +22,10 @@ public class SeguroPJ extends Seguro {
     }
 
     public void calcularValor() {
+        /*
+         * Calcula o valor do seguro baseado nos fatores
+         * pré-definidos.
+         */
         int idade = Period.between(cliente.getDataFundacao(), LocalDate.now()).getYears();
         double qtdFunc = cliente.getQtdFuncionarios();
         double qtdVeiculos = this.getSeguradora().getSegurosPorCliente(cliente.getNome()).size();

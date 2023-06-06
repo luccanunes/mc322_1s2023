@@ -23,6 +23,9 @@ public class Condutor {
     }
 
     public void adicionarSinistro(Sinistro sinistro) {
+        /*
+         * Adiciona um sinistro à lista de sinistros
+         */
         listaSinistros.add(sinistro);
     }
 

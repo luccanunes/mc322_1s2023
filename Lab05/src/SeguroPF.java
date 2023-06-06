@@ -22,6 +22,10 @@ public class SeguroPF extends Seguro {
     }
 
     public void calcularValor() {
+        /*
+         * Calcula o valor do seguro baseado nos fatores
+         * pré-definidos.
+         */
         double FATOR_IDADE = 0;
         int idade = Period.between(cliente.getDataNascimento(), LocalDate.now()).getYears();
         if (18 <= idade && idade <= 30) {
