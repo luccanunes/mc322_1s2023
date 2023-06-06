@@ -61,6 +61,17 @@ public class Main {
         return encontrar_seguradora(nome_seguradora);
     }
 
+    public static Cliente perguntar_cliente(Scanner scan) {
+        /*
+         * Lê o nome de um cliente e sua seguradora e
+         * retorna o cliente correspondente
+         */
+        String nome_cliente;
+        System.out.println("Nome do cliente:");
+        nome_cliente = scan.nextLine();
+        return perguntar_seguradora(scan).encontrarCliente(nome_cliente);
+    }
+
     public static Frota perguntar_frota(Scanner scan) {
         /*
          * Lê o codigo de uma frota e retorna a Frota
@@ -343,7 +354,7 @@ public class Main {
                         case 8: { // Cadastrar frota
                             ClientePJ cliente = ler_cliente_pj(scan);
                             Frota frota = ler_frota(scan);
-                            cliente.cadastrarFrota(frota)
+                            cliente.cadastrarFrota(frota);
                             break;
                         }
                         case 9: { // Cadastrar veículo
@@ -356,54 +367,52 @@ public class Main {
                     break;
                 }
                 case LISTAR: {
-                    System.out.println("(1) Listar clientes PJ por seguradora");
-                    System.out.println("(2) Listar clientes PF por seguradora");
-                    System.out.println("(3) Listar sinistros por cliente");
-                    System.out.println("(4) Listar veículos por cliente");
-                    System.out.println("(5) Listar veículos por seguradora");
-                    System.out.println("(6) Voltar");
+                    System.out.println("(1) Listar clientes por seguradora");
+                    System.out.println("(2) Listar veículos por cliente PF");
+                    System.out.println("(3) Listar frotas por cliente PJ");
+                    System.out.println("(4) Listar sinistros por condutor");
+                    System.out.println("(5) Listar sinistros por seguro");
+                    System.out.println("(6) Listar condutores por seguro");
+                    System.out.println("(7) Listar veículos por frota");
+                    System.out.println("(8) Voltar");
                     entrada = Integer.parseInt(scan.nextLine());
                     switch (entrada) {
-                        case 1: { // Listar clientes PJ
-                            perguntar_seguradora(scan).listarClientes("PJ");
-                            break;
-                        }
-                        case 2: { // Listar clientes PJ
-                            perguntar_seguradora(scan).listarClientes("PF");
-                            break;
-                        }
-                        case 3: { // Listar sinistros por cliente
-                            String nome_cliente;
-                            System.out.println("Nome do cliente:");
-                            nome_cliente = scan.nextLine();
-                            for (Seguradora seguradora : seguradoras) {
-                                seguradora.visualizarSinistro(nome_cliente);
-                            }
-                            break;
-                        }
-                        case 4: { // Listar veículos por cliente
-                            String nome_cliente;
-                            System.out.println("Nome do cliente:");
-                            nome_cliente = scan.nextLine();
-                            for (Seguradora seguradora : seguradoras) {
-                                Cliente cliente = seguradora.encontrarCliente(nome_cliente);
-                                if (Objects.nonNull(cliente)) {
-                                    for (Veiculo veiculo : cliente.getListaVeiculos()) {
-                                        System.out.println(veiculo);
-                                    }
-                                }
-                                break;
-                            }
-                            break;
-                        }
-                        case 5: { // Listar veículos por seguradora
+                        case 1: { // Listar clientes por seguradora
                             Seguradora seguradora = perguntar_seguradora(scan);
-                            for (Cliente cliente : seguradora.getListaClientes()) {
-                                for (Veiculo veiculo : cliente.getListaVeiculos()) {
-                                    System.out.println(veiculo);
-                                }
+                            System.out.println("CLIENTES PJ:");
+                            seguradora.listarClientes("PJ");
+                            System.out.println("CLIENTES PF:");
+                            seguradora.listarClientes("PF");
+                            break;
+                        }
+                        case 2: { // Listar veículos por cliente PF
+                            ClientePF cliente = (ClientePF) perguntar_cliente(scan);
+                            System.out.println("Veículos de " + cliente.getNome() + ":");
+                            System.out.println(cliente.getListaVeiculos());
+                            break;
+                        }
+                        case 3: { // Listar frotas por cliente PJ
+                            ClientePJ cliente = (ClientePJ) perguntar_cliente(scan);
+                            System.out.println("Frotas de " + cliente.getNome() + ":");
+                            System.out.println(cliente.getListaFrotas());
+                            break;
+                        }
+                        case 4: { // Listar sinistros por condutor
+                            Seguro seguro = perguntar_seguro(scan);
+                            for (Condutor condutor : seguro.getListaCondutores()) {
+                                System.out.println("Sinistros de " + condutor.getNome() + ":");
+                                System.out.println(condutor.getListaSinistros());
                             }
                             break;
+                        }
+                        case 5: { // Listar sinistros por seguro
+                            System.out.println(perguntar_seguro(scan).getListaSinistros());
+                        }
+                        case 6: { // Listar condutores por seguro
+                            System.out.println(perguntar_seguro(scan).getListaCondutores());
+                        }
+                        case 7: { // Listar veículos por frota
+                            System.out.println(perguntar_frota(scan).getListaVeiculos());
                         }
                     }
                     break;

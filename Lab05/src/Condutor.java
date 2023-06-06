@@ -8,7 +8,7 @@ public class Condutor {
     private String endereco;
     private String email;
     private LocalDate dataNascimento;
-    ArrayList<Sinistro> listaSinistros;
+    private ArrayList<Sinistro> listaSinistros;
 
     public Condutor(String nome, String endereco,
             String email, String telefone,
