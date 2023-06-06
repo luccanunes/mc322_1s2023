@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -317,8 +316,7 @@ public class Main {
             System.out.println("(2) Listar");
             System.out.println("(3) Excluir");
             System.out.println("(4) Atualizar frota");
-            System.out.println("(5) Transferir seguro");
-            System.out.println("(6) Calcular receita");
+            System.out.println("(5) Calcular receita");
             System.out.println("(0) Sair");
             int entrada = Integer.parseInt(scan.nextLine());
             comando = MenuOperacoes.values()[entrada];
@@ -446,12 +444,14 @@ public class Main {
                     switch (entrada) {
                         case 1: { // Excluir seguro
                             perguntar_seguradora(scan).cancelarSeguro(perguntar_seguro(scan).getId());
+                            break;
                         }
                         case 2: { // Excluir cliente
                             String nome_cliente;
                             System.out.println("Nome do cliente:");
                             nome_cliente = scan.nextLine();
                             perguntar_seguradora(scan).removerCliente(nome_cliente);
+                            break;
                         }
                         case 3: { // Excluir veículo
                             String placa;
@@ -465,9 +465,11 @@ public class Main {
                                     if (cliente instanceof ClientePF)
                                         ((ClientePF) cliente).removerVeiculo(placa);
                             }
+                            break;
                         }
                         case 4: { // Excluir condutor de um seguro
                             perguntar_seguro(scan).desautorizarCondutor(perguntar_condutor(scan));
+                            break;
                         }
                     }
                     break;
@@ -522,11 +524,13 @@ public class Main {
                 LocalDate.of(2004, Month.JULY, 7),
                 "lucca@lucca.lucca");
         seguradora.cadastrarCliente(lucca);
-
+        for (Veiculo veiculo : veiculos_lucca)
+            lucca.cadastrarVeiculo(veiculo);
         seguradora.gerarSeguro(new SeguroPF(
                 LocalDate.of(1997, Month.OCTOBER, 10),
                 LocalDate.of(2010, Month.NOVEMBER, 21),
-                seguradora, lucca.getListaVeiculos().get(0),
+                seguradora,
+                lucca.getListaVeiculos().get(0),
                 lucca));
 
         ArrayList<Veiculo> veiculos_unicamp = new ArrayList<>();
@@ -557,13 +561,14 @@ public class Main {
                 "070.680.938-68", LocalDate.of(2003, Month.JANUARY, 31));
 
         // Gera sinistros
-        seguradora.getSegurosPorCliente("lucca").get(0).gerarSinistro(
+
+        seguradora.getSegurosPorCliente("Lucca").get(0).gerarSinistro(
                 new Sinistro(LocalDate.of(2023, Month.JUNE, 6), "Rua Saturnino de Brito 573",
                         seguradora, lucca.getListaVeiculos().get(0), lucca_condutor));
-        seguradora.getSegurosPorCliente("lucca").get(0).gerarSinistro(
+        seguradora.getSegurosPorCliente("Lucca").get(0).gerarSinistro(
                 new Sinistro(LocalDate.of(2023, Month.JUNE, 4), "Rua Roxo Moreira 666",
                         seguradora, lucca.getListaVeiculos().get(1), lucca_condutor));
-        seguradora.getSegurosPorCliente("unicamp").get(0).gerarSinistro(
+        seguradora.getSegurosPorCliente("Unicamp").get(0).gerarSinistro(
                 new Sinistro(LocalDate.of(2023, Month.JUNE, 3), "Rua Chico Buarque de Holanda",
                         seguradora, unicamp.getListaFrotas().get(0).getListaVeiculos().get(0),
                         vini_condutor));

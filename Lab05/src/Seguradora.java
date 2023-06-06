@@ -98,12 +98,12 @@ public class Seguradora {
         // Retorna false se o cliente não está registrado
         // Do contrário, retorna true
         for (int i = 0; i < listaClientes.size(); ++i) {
-            if (listaClientes.get(i).getNome() == cliente) {
+            if (listaClientes.get(i).getNome().equals(cliente)) {
                 listaClientes.remove(i);
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void listarClientes(String tipoCliente) {

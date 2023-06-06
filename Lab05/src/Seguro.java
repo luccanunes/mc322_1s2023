@@ -18,7 +18,6 @@ public abstract class Seguro {
         this.listaSinistros = new ArrayList<>();
         this.listaCondutores = new ArrayList<>();
         this.id = gerarId();
-        calcularValor();
     }
 
     public String toString() {

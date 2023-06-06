@@ -10,6 +10,7 @@ public class SeguroPF extends Seguro {
         super(dataInicio, dataFim, seguradora);
         this.veiculo = veiculo;
         this.cliente = cliente;
+        this.calcularValor();
     }
 
     public String toString() {
