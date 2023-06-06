@@ -94,6 +94,25 @@ public class Main {
         return encontrar_seguro(id);
     }
 
+    public static Condutor perguntar_condutor(Scanner scan) {
+        /*
+         * Lê o nome de um condutor e retorna o
+         * Condutor correspondente
+         */
+        String nome;
+        System.out.println("Nome do condutor:");
+        nome = scan.nextLine();
+        if (!Validacao.validaNome(nome)) {
+            System.out.println("Nome inválido!");
+            System.exit(0);
+        }
+        Seguro seguro = perguntar_seguro(scan);
+        for (Condutor condutor : seguro.getListaCondutores())
+            if (condutor.getNome().equals(nome))
+                return condutor;
+        return null;
+    }
+
     public static Condutor ler_condutor(Scanner scan) {
         /*
          * Lê os dados de um condutor e retorna
@@ -418,63 +437,37 @@ public class Main {
                     break;
                 }
                 case EXCLUIR: {
-                    System.out.println("(1) Excluir cliente");
-                    System.out.println("(2) Excluir veículo");
-                    System.out.println("(3) Excluir sinistro");
-                    System.out.println("(4) Voltar");
+                    System.out.println("(1) Excluir seguro");
+                    System.out.println("(2) Excluir cliente");
+                    System.out.println("(3) Excluir veiculo");
+                    System.out.println("(4) Excluir condutor de um seguro");
+                    System.out.println("(5) Voltar");
                     entrada = Integer.parseInt(scan.nextLine());
                     switch (entrada) {
-                        case 1: { // Excluir cliente
+                        case 1: { // Excluir seguro
+                            perguntar_seguradora(scan).cancelarSeguro(perguntar_seguro(scan).getId());
+                        }
+                        case 2: { // Excluir cliente
                             String nome_cliente;
                             System.out.println("Nome do cliente:");
                             nome_cliente = scan.nextLine();
                             perguntar_seguradora(scan).removerCliente(nome_cliente);
                         }
-                        case 2: { // Excluir veículo
+                        case 3: { // Excluir veículo
                             String placa;
                             System.out.println("Placa do veículo:");
                             placa = scan.nextLine();
                             for (Seguradora seguradora : seguradoras) { // Para toda seguradora
-                                ArrayList<Integer> indices_sinistro = new ArrayList<>();
-                                // Procura os sinistros associados ao veículo
-                                for (int i = 0; i < seguradora.getListaSinistros().size(); ++i) {
-                                    Sinistro sinistro = seguradora.getListaSinistros().get(i);
-                                    if (sinistro.getVeiculo().getPlaca().equals(placa)) {
-                                        indices_sinistro.add(i);
-                                    }
-                                }
-                                // Remove os sinistros
-                                for (int i : indices_sinistro)
-                                    seguradora.removerSinistro(i);
-                                // Procura os clientes que têm esse veículo
-                                for (int i = 0; i < seguradora.getListaClientes().size(); ++i) {
-                                    boolean tem_o_veiculo = false;
-                                    Cliente cliente = seguradora.getListaClientes().get(i);
-                                    for (Veiculo veiculo : cliente.getListaVeiculos()) {
-                                        if (veiculo.getPlaca().equals(placa)) {
-                                            tem_o_veiculo = true;
-                                            break;
-                                        }
-                                    }
-                                    // Remove o veículo da lista
-                                    if (tem_o_veiculo)
-                                        cliente.removerVeiculo(placa);
-                                }
+                                for (Seguro seguro : seguradora.getListaSeguros())
+                                    if (seguro instanceof SeguroPJ)
+                                        ((SeguroPJ) seguro).getFrota().removerVeiculo(placa);
+                                for (Cliente cliente : seguradora.getListaClientes())
+                                    if (cliente instanceof ClientePF)
+                                        ((ClientePF) cliente).removerVeiculo(placa);
                             }
                         }
-                        case 3: { // Excluir sinistro
-                            Seguradora seguradora = perguntar_seguradora(scan);
-                            int id_sinistro, indice_sinistro = -1;
-                            System.out.println("ID do sinistro:");
-                            id_sinistro = Integer.parseInt(scan.nextLine());
-                            for (int i = 0; i < seguradora.getListaSinistros().size(); ++i) {
-                                // Procura o sinistro nas seguradoras
-                                if (seguradora.getListaSinistros().get(i).getId() == id_sinistro) {
-                                    indice_sinistro = i; // Guarda o índice para apagar
-                                    break;
-                                }
-                            }
-                            seguradora.removerSinistro(indice_sinistro); // E apaga
+                        case 4: { // Excluir condutor de um seguro
+                            perguntar_seguro(scan).desautorizarCondutor(perguntar_condutor(scan));
                         }
                     }
                     break;
