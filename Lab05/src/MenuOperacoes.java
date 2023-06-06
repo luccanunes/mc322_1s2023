@@ -4,8 +4,7 @@ public enum MenuOperacoes {
     LISTAR(2),
     EXCLUIR(3),
     ATUALIZAR_FROTA(4),
-    TRANSFERIR_SEGURO(5),
-    CALCULAR_RECEITA(6);
+    CALCULAR_RECEITA(5);
 
     public final int operacao;
 

@@ -486,23 +486,6 @@ public class Main {
                     cliente.atualizarFrota(codigo, nova_lista_veiculos);
                     break;
                 }
-                case TRANSFERIR_SEGURO: {
-                    Seguradora seguradora = perguntar_seguradora(scan);
-                    String nome_doador, nome_receptor;
-                    System.out.println("Nome do cliente que fará a transferência:");
-                    nome_doador = scan.nextLine();
-                    System.out.println("Nome do cliente que receberá a transferência:");
-                    nome_receptor = scan.nextLine();
-                    Cliente doador = seguradora.encontrarCliente(nome_doador);
-                    Cliente receptor = seguradora.encontrarCliente(nome_receptor);
-                    for (Veiculo veiculo : doador.getListaVeiculos()) {
-                        receptor.adicionarVeiculo(veiculo);
-                    }
-                    doador.setListaVeiculos(new ArrayList<>());
-                    seguradora.calcularPrecoSeguroCliente(doador);
-                    seguradora.calcularPrecoSeguroCliente(receptor);
-                    break;
-                }
                 case CALCULAR_RECEITA: {
                     Seguradora seguradora = perguntar_seguradora(scan);
                     System.out.println("Receita seguradora: " + seguradora.calcularReceita());
