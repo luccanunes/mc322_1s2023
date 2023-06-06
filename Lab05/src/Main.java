@@ -472,21 +472,18 @@ public class Main {
                     }
                     break;
                 }
-                case GERAR_SINISTRO: {
-                    Seguradora seguradora = perguntar_seguradora(scan);
-                    Veiculo veiculo = ler_veiculo(scan);
-                    String endereco, nome_cliente;
-                    System.out.println("Endereço do sinistro:");
-                    endereco = scan.nextLine();
-                    System.out.println("Nome do cliente:");
-                    nome_cliente = scan.nextLine();
-                    Cliente cliente = seguradora.encontrarCliente(nome_cliente);
-                    if (!Objects.nonNull(cliente)) {
-                        System.out.println("Cliente não cadastrado!");
-                    } else {
-                        seguradora.gerarSinistro(veiculo, cliente, endereco);
-                        seguradora.calcularPrecoSeguroCliente(cliente);
-                    }
+                case ATUALIZAR_FROTA: {
+                    ClientePJ cliente = (ClientePJ) perguntar_cliente(scan);
+                    String codigo;
+                    int qtd_veiculos;
+                    ArrayList<Veiculo> nova_lista_veiculos = new ArrayList<>();
+                    System.out.println("Código da frota:");
+                    codigo = scan.nextLine();
+                    System.out.println("Nova quantidade de veículos na frota:");
+                    qtd_veiculos = Integer.parseInt(scan.nextLine());
+                    for (int i = 0; i < qtd_veiculos; ++i)
+                        nova_lista_veiculos.add(ler_veiculo(scan));
+                    cliente.atualizarFrota(codigo, nova_lista_veiculos);
                     break;
                 }
                 case TRANSFERIR_SEGURO: {
