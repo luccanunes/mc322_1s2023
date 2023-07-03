@@ -8,7 +8,7 @@ public class ArquivoSinistro implements I_Arquivo<Sinistro>{
     private File file;
 
     public ArquivoSinistro(){
-        this.file = new File("../arquivos_csv/sinistros.csv");
+        this.file = new File("arquivos_csv/sinistros.csv");
         // Cria o arquivo
         try {
             file.delete();

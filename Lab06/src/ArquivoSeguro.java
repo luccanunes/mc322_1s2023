@@ -8,7 +8,9 @@ public class ArquivoSeguro implements I_Arquivo<Seguro>{
     private File file;
 
     public ArquivoSeguro(){
-        this.file = new File("../arquivos_csv/seguros.csv");
+        this.file = new File("arquivos_csv/seguros.csv");
+        if (!file.getParentFile().exists())
+            file.getParentFile().mkdirs();
         // Cria o arquivo
         try {
             file.delete();
@@ -18,6 +20,7 @@ public class ArquivoSeguro implements I_Arquivo<Seguro>{
             writer.close();
         } catch(Exception e) {
             System.out.println("Ocorreu um erro no gerenciamento do arquivo de Seguro.");
+            System.out.println(e);
         }
     }
     

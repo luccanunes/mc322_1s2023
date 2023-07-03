@@ -7,7 +7,7 @@ public class ArquivoClientePJ implements I_Arquivo<ClientePJ>{
     private File file;
 
     public ArquivoClientePJ(){
-        this.file = new File("../arquivos_csv/clientesPJ.csv");
+        this.file = new File("arquivos_csv/clientesPJ.csv");
     }
     
     // Método não utilizado

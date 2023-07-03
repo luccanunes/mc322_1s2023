@@ -7,7 +7,7 @@ public class ArquivoFrota implements I_Arquivo<Frota>{
     private File file;
 
     public ArquivoFrota(){
-        this.file = new File("../arquivos_csv/frotas.csv");
+        this.file = new File("arquivos_csv/frotas.csv");
     }
     
     // Método não utilizado

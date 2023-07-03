@@ -7,7 +7,7 @@ public class ArquivoClientePF implements I_Arquivo<ClientePF>{
     private File file;
 
     public ArquivoClientePF(){
-        this.file = new File("../arquivos_csv/clientesPF.csv");
+        this.file = new File("arquivos_csv/clientesPF.csv");
     }
     
     // Método não utilizado

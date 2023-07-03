@@ -7,7 +7,9 @@ public class ArquivoVeiculo implements I_Arquivo<Veiculo>{
     private File file;
 
     public ArquivoVeiculo(){
-        this.file = new File("../arquivos_csv/veiculos.csv");
+        this.file = new File("arquivos_csv/veiculos.csv");
+        if (!file.getParentFile().exists())
+            file.getParentFile().mkdirs();
     }
     
     // Método não utilizado
@@ -27,6 +29,7 @@ public class ArquivoVeiculo implements I_Arquivo<Veiculo>{
             return res;
         } catch (IOException e) {
             System.out.println("Ocorreu um erro na leitura do arquivo de Veiculo.");
+            System.out.println(e);
             return null;
         }
     }

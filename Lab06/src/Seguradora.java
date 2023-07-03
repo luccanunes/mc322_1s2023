@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.SplittableRandom;
 
 public class Seguradora {
     private final String cnpj;
@@ -27,6 +28,14 @@ public class Seguradora {
         this.endereco = endereco;
         this.listaClientes = new ArrayList<>();
         this.listaSeguros = new ArrayList<>();
+        this.listaCondutores = new ArrayList<>();
+        this.arquivoClientePF = new ArquivoClientePF();
+		this.arquivoClientePJ = new ArquivoClientePJ();
+		this.arquivoCondutor = new ArquivoCondutor();
+		this.arquivoFrota = new ArquivoFrota();
+		this.arquivoVeiculo = new ArquivoVeiculo();
+		this.arquivoSeguro = new ArquivoSeguro();
+		this.arquivoSinistro = new ArquivoSinistro();
     }
 
     public String toString() {

@@ -509,6 +509,8 @@ public class Main {
                 "Avenida Segura 221");
         seguradoras.add(seguradora);
 
+        seguradora.lerDados();
+
         // Instancia clientes teste
         ArrayList<Veiculo> veiculos_lucca = new ArrayList<>();
         veiculos_lucca.add(new Veiculo("666", "Ferrari", "Corsa", 2018));
@@ -588,6 +590,8 @@ public class Main {
         System.out.println(lucca.getListaVeiculos().get(0));
         System.out.println(unicamp.getListaFrotas().get(0));
         System.out.println(seguradora.getListaSeguros().get(0));
+
+        seguradora.gravarDados();
 
         System.out.println("-------FIM DA MAIN-------");
         menuInterativo();

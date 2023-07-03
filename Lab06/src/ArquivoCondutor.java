@@ -7,7 +7,7 @@ public class ArquivoCondutor implements I_Arquivo<Condutor>{
     private File file;
 
     public ArquivoCondutor(){
-        this.file = new File("../arquivos_csv/condutores.csv");
+        this.file = new File("arquivos_csv/condutores.csv");
     }
     
     // Método não utilizado
